@@ -1,0 +1,11 @@
+C:\Users\rares\source\repos\DetProject\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Persistence.deps.json
+C:\Users\rares\source\repos\DetProject\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Persistence.dll
+C:\Users\rares\source\repos\DetProject\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.csprojResolveAssemblyReference.cache
+C:\Users\rares\source\repos\DetProject\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\rares\source\repos\DetProject\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.AssemblyInfoInputs.cache
+C:\Users\rares\source\repos\DetProject\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.AssemblyInfo.cs
+C:\Users\rares\source\repos\DetProject\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Persistence.pdb
+C:\Users\rares\source\repos\DetProject\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Core.dll
+C:\Users\rares\source\repos\DetProject\Data.Persistence\bin\Debug\netcoreapp2.0\Data.Core.pdb
+C:\Users\rares\source\repos\DetProject\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.dll
+C:\Users\rares\source\repos\DetProject\Data.Persistence\obj\Debug\netcoreapp2.0\Data.Persistence.pdb
