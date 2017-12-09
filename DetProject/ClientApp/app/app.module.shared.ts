@@ -9,6 +9,9 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { MusiciansComponent } from './components/musicians/musicians.component';
+
+
 
 @NgModule({
     declarations: [
@@ -16,6 +19,7 @@ import { CounterComponent } from './components/counter/counter.component';
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
+        MusiciansComponent,
         HomeComponent
     ],
     imports: [
@@ -27,6 +31,7 @@ import { CounterComponent } from './components/counter/counter.component';
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'musicians', component: MusiciansComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
