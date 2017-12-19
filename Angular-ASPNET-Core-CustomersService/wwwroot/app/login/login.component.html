@@ -1,0 +1,74 @@
+﻿<div class="login-container">
+    <div class="login-box">
+        <div class="login-header">
+            <div *ngIf="view"> Login first</div>
+            <div *ngIf="!view"> Register</div>
+        </div>
+        
+        <div class="login-content">
+            
+            <div class="login-view" [ngClass]="{'hidden':!view}">
+                <div class="errorMessage">{{loginMessage}}</div>
+                <form (ngSubmit)="login(loginForm)" #loginForm="ngForm" novalidate>
+                    <div class="input-group">
+                        <div class="input-field-name">email</div>
+                        <input type="email" class="input-field" name="email" [(ngModel)]="loginForm.email" #email="ngModel" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">password</div>
+                        <input type="password" class="input-field" name="password" [(ngModel)]="loginForm.password" #password="ngModel" required>
+                    </div>
+                    <a class="forgot-password-link" href="#">forgot password?</a>
+
+                    <button type="submit" class="btn btn-default btn-block register-submit loginBtn" [disabled]="!loginForm.valid">LOGIN</button>
+
+                    <div class="separator"></div>
+                    <div (click)="toggle()" class="button register-button">
+                        <label class="btn-label">
+                            Register now
+                            <span class="glyphicon glyphicon-new-window"></span>
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="login-view register" [ngClass]="{'hidden':view}">
+                <div *ngIf="statusRegister">
+                    <div class="succesMessage">{{message}}</div>
+                </div>
+                <div *ngIf="!statusRegister">
+                    <div class="errorMessage">{{message}}</div>
+                </div>
+                <form (ngSubmit)="register()" #registerForm="ngForm" novalidate>
+                    <div class="input-group">
+                        <div class="input-field-name">username</div>
+                        <input type="text" class="input-field" name="userName" [(ngModel)]="user.userName" #userName="ngModel" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">email</div>
+                        <input type="email" class="input-field" name="email" [(ngModel)]="user.email" #email="ngModel" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">password</div>
+                        <input type="password" class="input-field" name="password" [(ngModel)]="user.password" #password="ngModel" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">display name</div>
+                        <input type="text" class="input-field" name="displayName" [(ngModel)]="user.displayName" #displayName="ngModel" required>
+                    </div>
+
+                    <div class="separator"></div>
+                    <button type="submit" class="btn btn-default btn-block register-submit" [disabled]="!registerForm.valid">REGISTER</button>
+                    <div class="separator"></div>
+                    <div (click)="toggle()" class="button register-button">
+                        <label class="btn-label">
+                            Log in
+                            <span class="glyphicon glyphicon-new-window"></span>
+                        </label>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
