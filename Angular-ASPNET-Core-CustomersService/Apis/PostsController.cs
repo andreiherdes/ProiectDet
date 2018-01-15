@@ -96,7 +96,6 @@ namespace Angular_ASPNETCore_CustomersService.Apis
 
         // PUT api/posts/5
         [HttpPut("{id}")]
-        [ValidateAntiForgeryToken]
         [ProducesResponseType(typeof(ApiResponse), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
         public async Task<ActionResult> UpdatePost(int id, [FromBody]Post post)
@@ -123,8 +122,7 @@ namespace Angular_ASPNETCore_CustomersService.Apis
         }
 
         // DELETE api/posts/5
-        [HttpDelete("{id}")]
-        [ValidateAntiForgeryToken]
+        [HttpDelete("delete/{id}")]
         [ProducesResponseType(typeof(ApiResponse), 200)]
         [ProducesResponseType(typeof(ApiResponse), 400)]
         public async Task<ActionResult> DeletePost(int id)
@@ -144,6 +142,5 @@ namespace Angular_ASPNETCore_CustomersService.Apis
                 return BadRequest(new ApiResponse { Status = false });
             }
         }
-
     }
 }
