@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Angular_ASPNETCore_CustomersService.Infrastructure;
@@ -7,6 +8,7 @@ using Angular_ASPNETCore_CustomersService.Models;
 using Data.Core.Domain;
 using Data.Core.Dtos;
 using Data.Core.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -143,6 +145,52 @@ namespace Angular_ASPNETCore_CustomersService.Apis
                 _logger.LogError(exp.Message);
                 return BadRequest(new ApiResponse { Status = false });
             }
+        }
+        
+        
+        [HttpPost("fileUpload")]
+        public async  Task<IActionResult> Post([FromForm]IFormFile file)
+        {
+                var stream = file.OpenReadStream();
+                var name = file.FileName;
+                
+                return null; //null just to make error free
+        }
+        
+        [HttpPost("upFile")]
+        public async Task<IActionResult> UploadFile([FromForm]IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return Content("file not selected");
+
+            var path = Path.Combine(
+                Directory.GetCurrentDirectory(), "wwwroot",
+                file.FileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return null;
+        }
+        [HttpGet("getFile/{filename}")]
+        public async Task<IActionResult> Download(string filename)
+        {
+            if (filename == null)
+                return Content("filename not present");
+
+            var path = Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "wwwroot", filename);
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, Path.GetFileName(path));
         }
 
     }

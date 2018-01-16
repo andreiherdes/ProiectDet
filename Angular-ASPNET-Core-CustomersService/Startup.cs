@@ -39,6 +39,10 @@ namespace Angular_ASPNETCore_CustomersService
                 options.UseSqlServer(Configuration.GetConnectionString("CustomersSqlServerConnectionString"))
             );
 
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
             services.AddMvc();
 
             //Handle XSRF Name for Header
