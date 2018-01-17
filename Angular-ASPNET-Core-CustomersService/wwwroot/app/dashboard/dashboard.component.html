@@ -1,0 +1,164 @@
+﻿    <div class="navbarApp">
+        <a class="navbarApp-logo" href="#">
+            Det<span class="bold">App</span>
+        </a>
+        <div class="dropdown">
+            <div class="user-profile">
+                <div id="circle"></div>
+                <p id="username">{{profileEmail}}</p>
+            </div>
+            <div class="dropdown-content">
+                <label (click)="showProfile()">My profile</label>
+                <label (click)="showPost()">My post</label>
+                <label (click)="logout()">Logout</label>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="posts-canvas">
+            <div class="posts">
+                <div *ngIf="showMyProfile">
+                    <div class="card">
+                        <img class="profile-img" src="images/profile.png" alt="Avatar">
+                        <div class="containerCard">
+                            <h4><b>{{profileDisplayName}}</b></h4> 
+                            <p>Username: {{profileUserName}}</p>
+                            <p>Email: {{profileEmail}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div *ngIf="showMyPost">
+                    <div class="card" *ngIf="!showPostMessage">
+                        <img class="profile-img" src="images/post1.png" alt="Post">
+                        <div class="containerCard">
+                            <h4><b>{{myPost.firstName}} {{myPost.lastName}}</b></h4>
+                            <p>Gender: {{myPost.gender}}</p>
+                            <p>City: {{myPost.city}}</p>
+                            <p>Country: {{myPost.country}}</p>
+                            <p>Domain: {{myPost.domain}}</p>
+                            <p>Description: {{myPost.description}}</p>
+                            <div class="post-delete" (click)="deletePost()">
+                                <img src="images/rubbish-bin.png" alt="Delete">
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="card" *ngIf="showPostMessage">
+                        <div class="containerCard post-message">
+                            <h4><b>{{messagePost}}</b></h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <div *ngIf="!(showMyProfile || showMyPost)">
+                    <div *ngFor="let post of postsAfterFiltering">
+                        <div class="card card-post">
+                            <div class="containerCard">
+                                <div class="my-post-icon" *ngIf="post.userId == profileUserId">
+                                    <img src="images/new.png" alt="Post">
+                                </div>
+                                <h4><b>{{post.firstName}} {{post.lastName}}</b></h4>
+                                <p>City: {{post.city}}</p>
+                                <p>Country: {{post.country}}</p>
+                                <p>Domain: {{post.domain}}</p>
+                                <p>Description: {{post.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div *ngIf="!arrowValue">
+                <div class="fields">
+                    <div class="location">
+                        <form>
+                            <div class="group">
+                                <input id="searchInput" name="location" [(ngModel)]="location" (keyup)="searchByLocation($event)" type="text" placeholder="" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Location</label>
+                            </div>
+
+                            <div class="group">
+                                <input type="text" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Domain</label>
+                            </div>
+                        </form>
+                    </div>   
+                    <div id="line">
+                    </div>
+                    <div class="form-posts">
+                        <div id="slidecontainer">
+                            <p id="dist-name">Number of posts</p>
+                            <input type="range" min="0" max="100" value="0" class="slider" id="myRange" [(ngModel)]="myValueSlider" (change)="onChangeSlider()">
+                            <p id="dist-value">Value: {{myValueSlider}}<span id="dist"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="resetForm" (click)="resetFormFields()">
+                        <img src="images/reset.png" alt="Reset">
+                    </div> 
+                </div>
+            </div>
+            <div *ngIf="arrowValue" class="no-fields"></div>
+
+            <button type="button" class="btn-demo" (click)="changeArrowValue()">
+                <div *ngIf="!arrowValue">
+                    Add your post right now
+                    <span  class="glyphicon glyphicon-arrow-up"></span>
+                </div>
+                <div *ngIf="arrowValue">
+                    Filters
+                    <span  class="glyphicon glyphicon-arrow-down"></span>
+                </div>
+            </button>
+            
+            <div class="form-add-post" *ngIf="arrowValue">
+                <div *ngIf="statusRegister">
+                    <div class="succesMessage">{{message}}</div>
+                </div>
+                <div *ngIf="!statusRegister">
+                    <div class="errorMessage">{{message}}</div>
+                </div>
+                <form (ngSubmit)="submit()" #addNewPostForm="ngForm" novalidate>
+                    <div class="input-group">
+                        <div class="input-field-name">first name</div>
+                        <input type="text" class="input-field" name="firstName" [(ngModel)]="newPost.firstName" #firstName="ngModel" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">last name</div>
+                        <input type="text" class="input-field" name="lastName" [(ngModel)]="newPost.lastName" #lastName="ngModel" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">city</div>
+                        <input type="text" class="input-field" name="city" [(ngModel)]="newPost.city" #city="ngModel" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">country</div>
+                        <input type="text" class="input-field" name="country" [(ngModel)]="newPost.country" #country="ngModel" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">gender</div>
+                        <input type="radio" [(ngModel)]="newPost.gender" name="gender" value="male" required> Male &nbsp;
+                        <input type="radio" [(ngModel)]="newPost.gender" name="gender" value="female" required> Female
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">domain</div>
+                        <input type="text" class="input-field" name="domain" [(ngModel)]="newPost.domain" #domain="ngModel" required>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-field-name">description</div>
+                        <textarea rows="4" cols="50" maxlength="200" class="input-field textarea-description" name="description" [(ngModel)]="newPost.description" #description="ngModel" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <input #fileInput type="file"/>
+                    </div>
+                    <button type="submit" class="btn btn-default btn-block register-submit" [disabled]="!addNewPostForm.valid">SHARE YOUR POST</button>
+
+                </form>
+            </div>
+        </div>
+    </div>

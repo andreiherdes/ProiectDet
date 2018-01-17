@@ -1,10 +1,13 @@
-﻿using System;
-
-namespace Data.Core.Domain
+﻿namespace Data.Core.Domain
 {
     public class Song
     {
-        public Guid Id { get; set; }
-        public Genre genre { get; set; }
+        public int Id { get; set; }
+        public int PostId { get; set; }
+
+        public byte[] Content { get; set; }
+        public string Name { get; set; }
+
+        public Post Post { get; set; }
     }
 }

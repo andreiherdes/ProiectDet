@@ -1,17 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Data.Core.Domain
 {
     public class Post
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+
+        public int UserId { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string City { get; set; }
+        public string Country { get; set; }
+        public string Gender { get; set; }
+
+        public string Domain { get; set; }
         public string Description { get; set; }
-        public Genre WantedGenre { get; set; }
-        public Bussines IssuedByBussines { get; set; }
-        public List<Musician> MusiciansWhoApplied { get; set; }
-        public DateTime IssuedDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
-        public bool IsActive { get; set; }
+        public DateTime PostDate { get; set; }
+        public Song UploadedSong { get; set; }
+
+        public User User { get; set; }
     }
 }
