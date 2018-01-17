@@ -19,14 +19,18 @@ namespace Data.Persistence {
                 .HasOne(p => p.Post)
                 .WithOne(u => u.User)
                 .HasForeignKey<Post>(f => f.UserId);
+
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.UploadedSong)
+                .WithOne(u => u.Post)
+                .HasForeignKey<Song>(f => f.PostId);
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
-
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Song> Songs { get; set; }
+        
         public DbSet<Order> Orders { get; set; }
-        public DbSet<State> States { get; set; }
         
     }
 }

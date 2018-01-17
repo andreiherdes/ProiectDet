@@ -19,6 +19,7 @@ namespace Data.Core.Domain
         public string Domain { get; set; }
         public string Description { get; set; }
         public DateTime PostDate { get; set; }
+        public Song UploadedSong { get; set; }
 
         public User User { get; set; }
     }

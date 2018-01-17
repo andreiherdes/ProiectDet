@@ -153,6 +153,9 @@
                         <div class="input-field-name">description</div>
                         <textarea rows="4" cols="50" maxlength="200" class="input-field textarea-description" name="description" [(ngModel)]="newPost.description" #description="ngModel" required></textarea>
                     </div>
+                    <div class="input-group">
+                        <input #fileInput type="file"/>
+                    </div>
                     <button type="submit" class="btn btn-default btn-block register-submit" [disabled]="!addNewPostForm.valid">SHARE YOUR POST</button>
 
                 </form>

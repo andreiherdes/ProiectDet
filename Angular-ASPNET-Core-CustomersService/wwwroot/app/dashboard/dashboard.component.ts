@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ViewChild } from '@angular/core';
 
 import { DataService } from '../core/data.service';
 import { IPostModel, IPost } from '../shared/interfaces';
@@ -11,6 +12,7 @@ import { IPostModel, IPost } from '../shared/interfaces';
 })
 export class DashboardComponent implements OnInit {
 
+    @ViewChild("fileInput") fileInput: any;
     location: '';
 
     newPost: IPostModel = {
@@ -21,7 +23,7 @@ export class DashboardComponent implements OnInit {
         country: '',
         gender: 'male',
         domain: '',
-        description: '',
+        description: ''
     };
 
     posts: IPost[];
@@ -140,15 +142,22 @@ export class DashboardComponent implements OnInit {
     }
 
     submit() {
+        let fi = this.fileInput.nativeElement;
+        let fileToUpload: any;
+        if (fi.files && fi.files[0]) {
+            fileToUpload = fi.files[0];
+        }
         console.log(this.newPost);
         this.newPost.userId = ((localStorage.getItem("userId")) as any);
-        this.dataService.insertPost(this.newPost)
+        this.dataService.insertPost(this.newPost, fileToUpload)
             .subscribe((newpost: IPostModel) => {
                     if (newpost) {
                         console.log('Done');
                     } else {
                         console.log('Unable to insert new post :(');
                     }
+                    console.log(this.newPost.fileToUpload);
+                    console.log(this.newPost);
                     this.message = 'post has been successfully added';
                     this.statusRegister = true;
                     this.getPosts();

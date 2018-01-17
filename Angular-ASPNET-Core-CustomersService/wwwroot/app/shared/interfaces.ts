@@ -38,6 +38,7 @@ export interface IPostModel {
     gender: string;
     domain: string;
     description: string;
+    fileToUpload?: FormData;
 }
 
 export interface IPost {
@@ -50,6 +51,7 @@ export interface IPost {
     gender: string;
     domain: string;
     description: string;
+    fileToUpload: FormData;
     postDate: Date;
 }
 

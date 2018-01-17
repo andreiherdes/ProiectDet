@@ -114,7 +114,10 @@ export class DataService {
             .catch(this.handleError);
     }
 
-    insertPost(post: IPostModel): Observable<IPostModel> {
+    insertPost(post: IPostModel, fileToUpload: any): Observable<IPostModel> {
+        let input = new FormData();
+        input.append("file", fileToUpload);
+        post.fileToUpload = input;
         return this.http.post(this.baseUrlPost, post)
             .map((resp: Response) => {
                 const data = resp.json();
